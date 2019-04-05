@@ -3,7 +3,7 @@ module.exports = {
     'browser': true,
     'es6': true
   },
-  'extends': 'standard',
+  'extends': 'eslint:recommended',
   'globals': {
     'Atomics': 'readonly',
     'SharedArrayBuffer': 'readonly'
@@ -13,5 +13,6 @@ module.exports = {
     'sourceType': 'module'
   },
   'rules': {
+    'no-console': 'off'
   }
 }
