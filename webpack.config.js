@@ -4,11 +4,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
     mode: 'development',
     entry: [
-        './src/index.js'
+        './src/index.ts'
     ],
     output: {
         path: __dirname + "/dist",
         filename: "index_bundle.js"
+    },
+    resolve: {
+        extensions: ['.ts', '.js', '.json']
     },
     module: {
         rules: [
@@ -19,6 +22,11 @@ module.exports = {
                 options: {
                     // eslint options (if necessary)
                 }
+            },
+            {
+                test: /\.ts?$/,
+                loader: 'ts-loader',
+                exclude: /node_modules/,
             },
             {
                 test: /\.m?js$/,

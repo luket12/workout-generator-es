@@ -1,5 +1,16 @@
 import WorkoutGenerator from '../src/WorkoutGenerator';
-import { stubDate } from "./stubDate";
+
+const fixedDate = new Date('2019-01-01T12:01:00');
+
+beforeAll(() => {
+  Date = class extends Date {
+    constructor() {
+      super();
+
+      return fixedDate;
+    }
+  };
+});
 
 test('The workout generator set the correct set total and set times', () => {
   // Create a workout generator object
@@ -10,16 +21,13 @@ test('The workout generator set the correct set total and set times', () => {
 });
 
 test('The workout generator has the expected workout start & end times', () => {
-  const myDate = new Date('2019-01-01T12:01:00');
-
-  stubDate(myDate);
 
   // Create a workout generator object
   const workoutGenerator = new WorkoutGenerator(30, 60);
 
   // The start workout time should be at the next 10 minute interval and end 30 minutes later
-  expect(workoutGenerator.startTime).toEqual(1546344600000);
-  expect(workoutGenerator.endTime).toEqual(1546346400000);
+  expect(workoutGenerator.startTime).toEqual(new Date(1546344600000));
+  expect(workoutGenerator.endTime).toEqual(new Date(1546346400000));
 });
 
 test('The workout generator has the expected number of exercise sets for a user', () => {
