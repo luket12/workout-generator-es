@@ -30,12 +30,12 @@ export default class WorkoutGenerator {
       this.endTime = new Date(endTimestamp);
     }
 
-  roundTimeNearestTenMins(time: Date) {
-    var timeToReturn = new Date(time);
+    static roundTimeNearestTenMins(time: Date) {
+      var timeToReturn = new Date(time);
 
-    timeToReturn.setMilliseconds(Math.round(time.getMilliseconds() / 1000) * 1000);
-    timeToReturn.setSeconds(Math.round(timeToReturn.getSeconds() / 60) * 60);
-    timeToReturn.setMinutes(Math.round(timeToReturn.getMinutes() / 10) * 10);
-    return timeToReturn;
-  }
+      timeToReturn.setMilliseconds(Math.round(time.getMilliseconds() / 1000) * 1000);
+      timeToReturn.setSeconds(Math.round(timeToReturn.getSeconds() / 60) * 60);
+      timeToReturn.setMinutes(Math.round(timeToReturn.getMinutes() / 10) * 10);
+      return timeToReturn;
+    }
 }
