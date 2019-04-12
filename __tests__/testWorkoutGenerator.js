@@ -1,4 +1,5 @@
 import WorkoutGenerator from '../src/WorkoutGenerator';
+import Workout from '../src/Workout';
 
 const fixedDate = new Date('2019-01-01T12:01:00');
 
@@ -32,14 +33,16 @@ test('The workout generator has the expected workout start & end times', () => {
 
 test('The workout generator has the expected number of exercise sets for a user', () => {
   // create a workout generator object and generate the workout
-  const workoutGenerator = new WorkoutGenerator(30, 60).generate();
+  const workoutGenerator = new WorkoutGenerator(30, 60);
+
+  workoutGenerator.generate();
 
   // Get the workouts
   let workouts = workoutGenerator.getWorkouts();
 
   // Check that exercise sets have been created
   expect(workouts).toBeDefined();
-  expect(workouts).toBeGreaterThan(1);
+  expect(workouts.length).toBeGreaterThanOrEqual(1);
 
   expect(workouts[0]).toBeInstanceOf(Workout);
 

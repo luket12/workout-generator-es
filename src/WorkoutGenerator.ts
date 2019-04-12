@@ -1,16 +1,23 @@
 'use strict';
 
+import Workout from './Workout';
+
 // This class generates a workout based on the number of sets and set time
 export default class WorkoutGenerator {
     readonly workoutSets: number;
     readonly workoutSetTime: number;
     private startTime: Date;
     private endTime: Date;
+    workouts: Array<Workout>;
 
     constructor(workoutSets: number, workoutSetTime: number) {
       this.workoutSets = workoutSets;
       this.workoutSetTime = workoutSetTime;
       this.setWorkoutTimes();
+    }
+
+    getWorkouts(): Array<Workout> {
+      return this.workouts;
     }
 
     getWorkoutSets() {
@@ -37,5 +44,12 @@ export default class WorkoutGenerator {
       timeToReturn.setSeconds(Math.round(timeToReturn.getSeconds() / 60) * 60);
       timeToReturn.setMinutes(Math.round(timeToReturn.getMinutes() / 10) * 10);
       return timeToReturn;
+    }
+
+    generate() {
+      // for every user we need to create a workout
+      // for (let i = 0; i < this.)
+
+      this.workouts = [];
     }
 }
