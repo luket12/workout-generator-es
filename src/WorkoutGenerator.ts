@@ -22,7 +22,7 @@ export default class WorkoutGenerator {
     }
 
     setWorkoutTimes() {
-      let startTimestamp = this.roundTimeNearestTenMins(new Date()).getTime();
+      let startTimestamp = WorkoutGenerator.roundTimeNearestTenMins(new Date()).getTime();
 
       let endTimestamp = startTimestamp + ((this.workoutSets * this.workoutSetTime) * 1000);
 
