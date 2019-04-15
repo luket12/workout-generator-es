@@ -4,15 +4,15 @@ import Workout from './Workout';
 
 // This class generates a workout based on the number of sets and set time
 export default class WorkoutGenerator {
-    readonly workoutSets: number;
-    readonly workoutSetTime: number;
+    readonly totalSets: number;
+    readonly workoutSetLength: number;
     private startTime: Date;
     private endTime: Date;
     workouts: Array<Workout>;
 
-    constructor(workoutSets: number, workoutSetTime: number) {
-      this.workoutSets = workoutSets;
-      this.workoutSetTime = workoutSetTime;
+    constructor(totalSets: number, workoutSetLength: number) {
+      this.totalSets = totalSets;
+      this.workoutSetLength = workoutSetLength;
       this.setWorkoutTimes();
     }
 
@@ -21,17 +21,17 @@ export default class WorkoutGenerator {
     }
 
     getWorkoutSets() {
-      return this.workoutSets;
+      return this.totalSets;
     }
 
     getWorkoutSetTime() {
-      return this.workoutSetTime;
+      return this.workoutSetLength;
     }
 
     setWorkoutTimes() {
       let startTimestamp = WorkoutGenerator.roundTimeNearestTenMins(new Date()).getTime();
 
-      let endTimestamp = startTimestamp + ((this.workoutSets * this.workoutSetTime) * 1000);
+      let endTimestamp = startTimestamp + ((this.totalSets * this.workoutSetLength) * 1000);
 
       this.startTime = new Date(startTimestamp);
       this.endTime = new Date(endTimestamp);
