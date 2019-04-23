@@ -46,10 +46,12 @@ export default class WorkoutGenerator {
       return timeToReturn;
     }
 
-    generate() {
-      // for every user we need to create a workout
-      // for (let i = 0; i < this.)
-
+    generate(users: Array<any>, exercises: Array<any>) {
       this.workouts = [];
+
+      // for every user we need to create a workout
+      for (let i = 0; i < users.length; i++) {
+        this.workouts.push(new Workout(users[i].name, []));
+      }
     }
 }

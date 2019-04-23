@@ -31,32 +31,40 @@ test('The workout generator has the expected workout start & end times', () => {
   expect(workoutGenerator.endTime).toEqual(new Date(1546346400000));
 });
 
+// Come dn
+
 test('The workout generator has the expected number of exercise sets for a user', () => {
+  let users = [
+    {
+      'name': 'Jon',
+      'type': 'beginner'
+    }
+  ];
+
+  let exercises = [
+    {
+      "name": "Handstands"
+    }
+  ];
+
   // create a workout generator object and generate the workout
   const workoutGenerator = new WorkoutGenerator(30, 60);
 
-  workoutGenerator.generate();
-
-  // Get the workouts
+  workoutGenerator.generate(users, exercises);
   let workouts = workoutGenerator.getWorkouts();
 
   // Check that exercise sets have been created
   expect(workouts).toBeDefined();
   expect(workouts.length).toBeGreaterThanOrEqual(1);
-
   expect(workouts[0]).toBeInstanceOf(Workout);
 
   // The generated workout should contain at least one user with a name and either beginner or advanced type
-  expect(workouts[0]).toContain({
-    firstName: 'James',
-    surname: 'Doe',
-    type: 'Beginner'
+  expect(workouts[0]).toMatchObject({
+    _user: 'Jon',
+    _workoutSets: []
   });
 
-  expect(workouts[1]).toContain({
-    firstName: 'Jim',
-    surname: 'Beam',
-    type: 'Advanced'
-  });
+  // Check there are 30 sets for the workout
+  expect(workouts[0].workoutSets.length).toEqual(30);
 });
 
