@@ -1,6 +1,8 @@
 'use strict';
 
 import Workout from './Workout';
+import WorkoutSet from './WorkoutSet';
+import Exercise from "./Exercise";
 
 // This class generates a workout based on the number of sets and set time
 export default class WorkoutGenerator {
@@ -46,12 +48,21 @@ export default class WorkoutGenerator {
       return timeToReturn;
     }
 
-    generate(users: Array<any>, exercises: Array<any>) {
+    generate(users: Array<any>, exercises: Array<any>): Workout {
       this.workouts = [];
 
       // for every user we need to create a workout
       for (let i = 0; i < users.length; i++) {
-        this.workouts.push(new Workout(users[i].name, []));
+        let workoutSets = [];
+
+        for (let setNumber = 0; setNumber < this.getWorkoutSets(); setNumber++) {
+          workoutSets.push(new WorkoutSet(setNumber+1, new Exercise()));
+        }
+
+        let workout = this.workouts.push(new Workout(users[i].name, workoutSets));
+
+        // Return the generated workout
+        return this.workouts[workout-1];
       }
     }
 }
