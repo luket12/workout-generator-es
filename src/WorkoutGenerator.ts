@@ -64,7 +64,7 @@ export default class WorkoutGenerator {
         let workoutSets = [];
 
         for (let setNumber = 0; setNumber < this.getWorkoutSets(); setNumber++) {
-          workoutSets.push(new WorkoutSet(setNumber+1, new Exercise()));
+          workoutSets.push(new WorkoutSet(setNumber+1, new Exercise("Exercise 1")));
         }
 
         let workout = this.workouts.push(new Workout(users[i].name, workoutSets));
