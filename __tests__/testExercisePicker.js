@@ -25,12 +25,12 @@ describe('The exercise picker', () => {
    test('can pick a random exercise', () => {
       // Create a set of 4 workout sets
       let workoutSetsA = Array.apply(null, Array(4)).map(() => {
-         return exercisePicker.getRandom();
+         return new Exercise(exercisePicker.getRandom().name);
       });
 
       // Create another set of 4 workout sets
       let workoutSetsB = Array.apply(null, Array(4)).map(() => {
-         return exercisePicker.getRandom();
+         return new Exercise(exercisePicker.getRandom().name);
       });
 
       // Verify they dont all match, must be randomising them

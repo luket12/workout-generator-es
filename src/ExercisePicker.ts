@@ -14,8 +14,6 @@ export default class ExercisePicker {
 	getRandom(): Exercise {
 		let randomIndex = Math.floor(Math.random() * this.exercises.length);
 
-		let theExercise = this.exercises[randomIndex];
-
-		return new Exercise(theExercise.name);
+		return this.exercises[randomIndex];
 	}
 }
