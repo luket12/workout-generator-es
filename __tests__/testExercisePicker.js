@@ -1,5 +1,6 @@
 import ExercisePicker from "../src/ExercisePicker";
 import Exercise from "../src/Exercise";
+import WorkoutSet from "../src/WorkoutSet";
 
 describe('The exercise picker', () => {
    const exercises = [
@@ -45,24 +46,48 @@ describe('The exercise picker', () => {
 
    test('does not allow handstands twice in a row', () => {
       // Create some workout sets
-      let workoutSetsA = Array.apply(null, Array(10)).map((item, index) => {
-         return new Exercise(exercisePicker.getRandom().name, index + 1);
-      });
+      let workoutSetsA = [
+        new WorkoutSet(1, new Exercise("Handstand")),
+        new WorkoutSet(2, new Exercise("Handstand")),
+        new WorkoutSet(3, new Exercise("Squats")),
+        new WorkoutSet(4, new Exercise("Deadlift"))
+      ];
 
       // Find each workout set which has handstands
-      let handstandSets = workoutSetsA.filter((exercise) => {
-         return exercise.exerciseName === 'Handstand';
+      let handstandSetsA = workoutSetsA.filter((workoutSet) => {
+         return workoutSet.exercise.exerciseName === 'Handstand';
       });
 
-      let duplicateSets = handstandSets.filter((currentSet, index) => {
+      let duplicateSetsA = handstandSetsA.filter((currentSet, index) => {
          let currentSetNumber = currentSet.setNumber;
 
-         if (typeof handstandSets[index+1] !== 'undefined') {
-            return (handstandSets[index+1].setNumber === currentSetNumber + 1) ? currentSet : '';
+         if (typeof handstandSetsA[index+1] !== 'undefined') {
+            return (handstandSetsA[index+1].setNumber === currentSetNumber + 1) ? currentSet : '';
          }
       });
 
-      expect(duplicateSets.length).toEqual(0);
+      let workoutSetsB = [
+         new WorkoutSet(1, new Exercise("Handstand")),
+         new WorkoutSet(2, new Exercise("Bench Press")),
+         new WorkoutSet(3, new Exercise("Squats")),
+         new WorkoutSet(4, new Exercise("Deadlift"))
+      ];
+
+      // Find each workout set which has handstands
+      let handstandSetsB = workoutSetsB.filter((workoutSet) => {
+         return workoutSet.exercise.exerciseName === 'Handstand';
+      });
+
+      let duplicateSetsB = handstandSetsB.filter((currentSet, index) => {
+         let currentSetNumber = currentSet.setNumber;
+
+         if (typeof handstandSetsB[index+1] !== 'undefined') {
+            return (handstandSetsB[index+1].setNumber === currentSetNumber + 1) ? currentSet : '';
+         }
+      });
+
+      expect(duplicateSetsA.length).toEqual(1);
+      expect(duplicateSetsB.length).toEqual(0);
    });
 
    test('does not allow cardio exercises twice in a row',() => {
