@@ -1,6 +1,10 @@
 "use strict";
 
 export default class Exercise {
+		constructor(exerciseName: String) {
+			this._exerciseName = exerciseName;
+		}
+
 		private _exerciseName: String;
 
 		get exerciseName(): String {
