@@ -8,8 +8,8 @@ import Exercise from "./Exercise";
 export default class WorkoutGenerator {
     readonly totalSets: number;
     readonly workoutSetLength: number;
-    private startTime: Date;
-    private endTime: Date;
+    private _startTime: Date;
+    private _endTime: Date;
     workouts: Array<Workout>;
 
     constructor(totalSets: number, workoutSetLength: number) {
@@ -35,17 +35,25 @@ export default class WorkoutGenerator {
 
       let endTimestamp = startTimestamp + ((this.totalSets * this.workoutSetLength) * 1000);
 
-      this.startTime = new Date(startTimestamp);
-      this.endTime = new Date(endTimestamp);
+      this._startTime = new Date(startTimestamp);
+      this._endTime = new Date(endTimestamp);
     }
 
     static roundTimeNearestTenMins(time: Date) {
-      var timeToReturn = new Date(time);
+      let timeToReturn = new Date(time);
 
       timeToReturn.setMilliseconds(Math.round(time.getMilliseconds() / 1000) * 1000);
       timeToReturn.setSeconds(Math.round(timeToReturn.getSeconds() / 60) * 60);
       timeToReturn.setMinutes(Math.round(timeToReturn.getMinutes() / 10) * 10);
       return timeToReturn;
+    }
+
+    get startTime(): Date {
+      return this._startTime;
+    }
+
+    get endTime(): Date {
+      return this._endTime;
     }
 
     generate(users: Array<any>, exercises: Array<any>): Workout {
