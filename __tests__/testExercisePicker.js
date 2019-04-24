@@ -1,5 +1,4 @@
 import ExercisePicker from "../src/ExercisePicker";
-import WorkoutSet from "../src/WorkoutSet";
 
 describe('The exercise picker', () => {
    const exercises = [
@@ -26,12 +25,12 @@ describe('The exercise picker', () => {
    test('can pick a random exercise', () => {
       // Create a set of 4 workout sets
       let workoutSetsA = Array.apply(null, Array(4)).map(() => {
-         return ExercisePicker.getRandom();
+         return exercisePicker.getRandom();
       });
 
       // Create another set of 4 workout sets
       let workoutSetsB = Array.apply(null, Array(4)).map(() => {
-         return ExercisePicker.getRandom();
+         return exercisePicker.getRandom();
       });
 
       // Verify they dont all match, must be randomising them

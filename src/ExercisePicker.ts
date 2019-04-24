@@ -1,11 +1,13 @@
 import Exercise from "./Exercise";
 
 export default class ExercisePicker {
-	constructor(exercises: Array<any>) {
+	private _exercises: Array<any>;
 
+	constructor(exercises: Array<any>) {
+		this._exercises = exercises;
 	}
 
-	static getRandom(): Exercise {
+	getRandom(): Exercise {
 		return new Exercise("Test");
 	}
 }
