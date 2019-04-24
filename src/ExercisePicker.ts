@@ -7,7 +7,15 @@ export default class ExercisePicker {
 		this._exercises = exercises;
 	}
 
+	get exercises(): Array<any> {
+		return this._exercises;
+	}
+
 	getRandom(): Exercise {
-		return new Exercise("Test");
+		let randomIndex = Math.floor(Math.random() * this.exercises.length);
+
+		let theExercise = this.exercises[randomIndex];
+
+		return new Exercise(theExercise.name);
 	}
 }
