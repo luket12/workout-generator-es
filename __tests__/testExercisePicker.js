@@ -1,4 +1,5 @@
 import ExercisePicker from "../src/ExercisePicker";
+import Exercise from "../src/Exercise";
 
 describe('The exercise picker', () => {
    const exercises = [
@@ -43,13 +44,25 @@ describe('The exercise picker', () => {
    });
 
    test('does not allow handstands twice in a row', () => {
-      // Create exercises
-
       // Create some workout sets
+      let workoutSetsA = Array.apply(null, Array(10)).map((item, index) => {
+         return new Exercise(exercisePicker.getRandom().name, index + 1);
+      });
 
       // Find each workout set which has handstands
+      let handstandSets = workoutSetsA.filter((exercise) => {
+         return exercise.exerciseName === 'Handstand';
+      });
 
-      // Check the next workout set is definitely not a handstand also
+      let duplicateSets = handstandSets.filter((currentSet, index) => {
+         let currentSetNumber = currentSet.setNumber;
+
+         if (typeof handstandSets[index+1] !== 'undefined') {
+            return (handstandSets[index+1].setNumber === currentSetNumber + 1) ? currentSet : '';
+         }
+      });
+
+      expect(duplicateSets.length).toEqual(0);
    });
 
    test('does not allow cardio exercises twice in a row',() => {
