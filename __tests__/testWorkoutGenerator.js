@@ -1,23 +1,15 @@
 import WorkoutGenerator from '../src/WorkoutGenerator';
 import Workout from '../src/Workout';
 
-const fixedDate = new Date('2019-01-01T12:01:00');
-
-beforeAll(() => {
-  Date = class extends Date {
-    constructor() {
-      super();
-
-      return fixedDate;
-    }
-  };
-});
-
 describe('The workout generator', () => {
+  const mockedDate = new Date('2019-01-01T12:01:00');
+  const originalDate = Date;
+  global.Date = jest.fn(() => mockedDate);
+  global.Date.setDate = originalDate.setDate;
+
   let workoutSets = 30;
   let setTime = 60;
   const workoutGenerator = new WorkoutGenerator(workoutSets, setTime);
-
 
   test('can set the correct set total and set times', () => {
     expect(workoutGenerator.getWorkoutSetTime()).toEqual(60);
@@ -26,11 +18,9 @@ describe('The workout generator', () => {
 
   test('can set the expected workout start & end times', () => {
     // The start workout time should be at the next 10 minute interval and end 30 minutes later
-    expect(workoutGenerator.startTime).toEqual(new Date(1546344600000));
-    expect(workoutGenerator.endTime).toEqual(new Date(1546346400000));
+    expect(workoutGenerator.startTime).toEqual(new Date('2019-01-01T12:10:00'));
+    expect(workoutGenerator.endTime).toEqual(new Date('2019-01-01T12:40:00'));
   });
-
-// Come dn
 
   test('can set the expected number of exercise sets for a user', () => {
     let users = [
