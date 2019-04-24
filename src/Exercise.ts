@@ -4,9 +4,8 @@ export default class Exercise {
 	private _exerciseName: String;
 	private _setNumber: Number;
 
-		constructor(exerciseName: String, setNumber: Number = 0) {
+		constructor(exerciseName: String) {
 			this._exerciseName = exerciseName;
-			this._setNumber = setNumber;
 		}
 
 		get setNumber(): Number {
