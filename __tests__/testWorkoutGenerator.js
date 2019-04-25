@@ -90,11 +90,39 @@ describe('The workout generator', () => {
   });
 
   test('beginner have 4 breaks, any other user have 2', () => {
-    // Create a lot of workout sets
+    // Use case 1: beginner user has 4 breaks
+    let usersA = [
+      {
+        "name": "Jonnie",
+        "Type": "Beginner"
+      }
+    ];
+
+    // Generate a full workout for a beginner user
+    let workoutA = workoutGenerator.generate(usersA, exercises);
 
     // Count the number of breaks are equal to 4 for beginners
+    let beginnerBreakCount = workoutA.workoutSets.filter((workoutSet) => {
+        return workoutSet.exercise.name === 'Break';
+    }).length;
 
-    // Count the number of breaks for other are 2
+    expect(beginnerBreakCount).toEqual(4);
+
+    let usersB = [
+      {
+        "name": "Marc Fitt",
+        "Type": "Advanced"
+      }
+    ];
+
+    // Use case 2: Any other user has 2 breaks
+    let workoutB = workoutGenerator.generate(usersB, exercises);
+
+    let nonBeginnerBreakCount = workoutB.workoutSets.filter((workoutSet) => {
+      return workoutSet.exercise.name === 'Break';
+    }).length;
+
+    expect(nonBeginnerBreakCount).toEqual(2);
   });
 });
 
