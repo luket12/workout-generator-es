@@ -141,14 +141,4 @@ describe('The exercise picker', () => {
          expect(duplicateExerciseTypeFoundDatasetB).toEqual(false);
       });
    });
-
-   test('beginner have 4 breaks, any other user have 2', () => {
-      // Create some exercises
-
-      // Create a lot of workout sets
-
-      // Count the number of breaks are equal to 4 for beginners
-
-      // Count the number of breaks for other are 2
-   });
 });
