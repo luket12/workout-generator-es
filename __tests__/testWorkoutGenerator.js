@@ -74,18 +74,24 @@ describe('The workout generator', () => {
     let workoutA = workoutGenerator.generate(users, exercises);
     let workoutB = workoutGenerator.generate(users, exercises);
 
-    // Get a collection of indexes to compare in both workouts
-    let setCollection = getWorkoutSetComparisonIndexes(workoutSets);
+    // Get a random number of indexes between 0 and max sets to use for comparing each workout dataset
+    let randomIndexes = getWorkoutSetComparisonIndexes(workoutSets);
 
-    // Find the number of matching sets from both workouts, if every index matches then it's not being randomised
-    let matches = setCollection.filter((item, index) => {
-        return workoutA[index] === workoutB[index];
+    // Compare dataset A workout set name to workout dataset B name at every random index, if they are random they wont match
+    let workoutIndexMatches = randomIndexes.filter((item) => {
+      return workoutA.workoutSets[item].exercise.name === workoutB.workoutSets[item].exercise.name;
     });
 
-    expect(matches.length).toBeLessThan(setCollection.length);
+    console.log("matches: " + workoutIndexMatches.length);
+    expect(workoutIndexMatches.length).toBeLessThan(randomIndexes.length);
+  });
 
-    // console.log("Set collection: ", setCollection.length);
-    // console.log("matches: " + matches.length);
+  test('beginner have 4 breaks, any other user have 2', () => {
+    // Create a lot of workout sets
+
+    // Count the number of breaks are equal to 4 for beginners
+
+    // Count the number of breaks for other are 2
   });
 });
 
@@ -96,6 +102,6 @@ function getRandomArbitrary(min, max) {
 function getWorkoutSetComparisonIndexes(workoutSets) {
     return Array.apply(null, Array(getRandomArbitrary(3,6)))
         .map(() => {
-            return getRandomArbitrary(1, workoutSets);
+            return getRandomArbitrary(1, workoutSets - 1);
         });
 }
