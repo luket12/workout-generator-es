@@ -2,7 +2,7 @@ import Exercise from "./Exercise";
 import WorkoutSet from "./WorkoutSet";
 
 export default class ExercisePicker {
-	private _exercises: Array<any>;
+	private readonly _exercises: Array<any>;
 
 	constructor(exercises: Array<any>) {
 		this._exercises = exercises;
@@ -19,14 +19,11 @@ export default class ExercisePicker {
 
 		return new Exercise(randomExercise.name);
 	}
-
+	
 	getRandom() {
 		let randomIndex = Math.floor(Math.random() * this.exercises.length);
 
-		// Get a random exercise
-		let randomExercise = this.exercises[randomIndex];
-
-		return randomExercise;
+		return this.exercises[randomIndex];
 	}
 
 	disallowDoubleHandstands(randomExercise: Exercise, workoutSets: Array<WorkoutSet> = [], currentSet: Number = 0) {
