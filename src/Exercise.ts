@@ -4,7 +4,7 @@ export default class Exercise {
 	private _name: String;
 	private _type: String;
 
-	constructor(name: String, type: String) {
+	constructor(name: String, type: String = '') {
 		this._name = name;
 		this._type = type;
 	}
