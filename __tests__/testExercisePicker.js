@@ -109,7 +109,6 @@ describe('The exercise picker', () => {
       ];
 
       let workoutSetsB = [
-         new WorkoutSet(1, new Exercise('Squat', 'Weight')),
          new WorkoutSet(2, new Exercise('Bench Press', 'Weight')),
          new WorkoutSet(3, new Exercise('Jogging', 'Cardio')),
          new WorkoutSet(4, new Exercise('Jumping Jacks', 'Fitness'))
@@ -121,7 +120,7 @@ describe('The exercise picker', () => {
 
          for (let i = 0; i < 100; i++) {
             // Pick new exercise 100 times, none of those should be the same type if it's working correctly
-            let newExerciseDatasetA = exercisePicker.pickExercise(workoutSetsA, 5, [], exerciseType);
+            let newExerciseDatasetA = exercisePicker.pickExercise(workoutSetsA, 4, [], exerciseType);
 
             // Get the latest workout set type
             let previousSetDatasetA = workoutSetsA[workoutSetsA.length - 1].exercise;
