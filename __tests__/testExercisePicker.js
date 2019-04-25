@@ -68,21 +68,28 @@ describe('The exercise picker', () => {
          new WorkoutSet(4, new Exercise("Deadlift"))
       ];
 
-      // Find each workout set which has handstands
-      let handstandSetsB = workoutSetsB.filter((workoutSet) => {
-         return workoutSet.exercise.exerciseName === 'Handstand';
-      });
+      // Keep getting random exercises up to 100 times, break the loop returning false when the exercise is ever handstand
+      let handstandFoundA = false;
+      let handstandFoundB = false;
 
-      let duplicateSetsB = handstandSetsB.filter((currentSet, index) => {
-         let currentSetNumber = currentSet.setNumber;
+      for (let i = 0; i < 100; i++) {
+         let nextExerciseA = exercisePicker.getRandom(5, workoutSetsA);
+         let nextExerciseB = exercisePicker.getRandom(5, workoutSetsB);
 
-         if (typeof handstandSetsB[index+1] !== 'undefined') {
-            return (handstandSetsB[index+1].setNumber === currentSetNumber + 1) ? currentSet : '';
+         console.log(`Exercise: ${nextExerciseA.name} iteration: ${i}`);
+
+         if (nextExerciseA.name === "Handstand") {
+            handstandFoundA = true;
+            break;
          }
-      });
 
-      expect(duplicateSetsA.length).toEqual(1);
-      expect(duplicateSetsB.length).toEqual(0);
+         if (nextExerciseB.name === "Handstand") {
+            handstandFoundB = true;
+         }
+      }
+
+      expect(handstandFoundA).toBe(false);
+      expect(handstandFoundB).toBe(true);
    });
 
    test('does not allow cardio exercises twice in a row',() => {
