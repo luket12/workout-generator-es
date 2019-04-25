@@ -2,18 +2,19 @@
 
 export default class Exercise {
 	private _name: String;
-	private _setNumber: Number;
+	private _type: String;
 
-	constructor(name: String) {
+	constructor(name: String, setNumber: Number,type: String) {
 		this._name = name;
+		this._type = type;
 	}
 
-	get setNumber(): Number {
-		return this._setNumber;
+	get type(): String {
+		return this._type;
 	}
 
-	set setNumber(value: Number) {
-		this._setNumber = value;
+	set type(value: String) {
+		this._type = value;
 	}
 
 	get name(): String {
