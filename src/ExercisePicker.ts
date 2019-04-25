@@ -23,7 +23,6 @@ export default class ExercisePicker {
 	}
 
 	disallowDoubleTypes(excludedTypes: [], randomExercise: Exercise, workoutSets: Array<WorkoutSet>, currentSet: Number = 0) {
-		console.log(`Incoming random exercise type: ${randomExercise.type}`);
 		if (typeof excludedTypes === "undefined" || excludedTypes.length <= 0) {
 			return randomExercise;
 		}
