@@ -23,6 +23,24 @@ export default class ExercisePicker {
 	}
 
 	disallowDoubleTypes(excludedTypes: [], randomExercise: Exercise, workoutSets: Array<WorkoutSet>, currentSet: Number = 0) {
+		console.log(`Incoming random exercise type: ${randomExercise.type}`);
+		if (typeof excludedTypes === "undefined" || excludedTypes.length <= 0) {
+			return randomExercise;
+		}
+
+		excludedTypes.forEach((excludedType) => {
+			if (randomExercise.type === excludedType) {
+				// @ts-ignore
+				let previousSet = workoutSets[currentSet - 2].exercise;
+
+				if (previousSet.type === randomExercise.type) {
+					// While the Change the exercise until it no longer matches
+					while (randomExercise.type === excludedType) {
+						randomExercise = this.pickExercise(workoutSets, currentSet, [], excludedTypes);
+					}
+				}
+			}
+		});
 		return randomExercise;
 	}
 
@@ -35,10 +53,10 @@ export default class ExercisePicker {
 			// Check the excluded exercise matches the current random
 			if (randomExercise.name === exercise) {
 				// @ts-ignore
-				let previousSet = workoutSets[currentSet-2];
+				let previousSet = workoutSets[currentSet-2].exercise;
 
 				// Check the previous set was also the same as the random
-				if (previousSet.exercise.name === randomExercise.name) {
+				if (previousSet.name === randomExercise.name) {
 
 					// Change the random exercise until it's not a handstand
 					while (randomExercise.name === exercise) {
