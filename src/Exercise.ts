@@ -4,23 +4,23 @@ export default class Exercise {
 	private _name: String;
 	private _setNumber: Number;
 
-		constructor(name: String) {
-			this._name = name;
-		}
+	constructor(name: String) {
+		this._name = name;
+	}
 
-		get setNumber(): Number {
-			return this._setNumber;
-		}
+	get setNumber(): Number {
+		return this._setNumber;
+	}
 
-		set setNumber(value: Number) {
-			this._setNumber = value;
-		}
+	set setNumber(value: Number) {
+		this._setNumber = value;
+	}
 
-		get name(): String {
-			return this._name;
-		}
+	get name(): String {
+		return this._name;
+	}
 
-		set name(value: String) {
-			this._name = value;
-		}
+	set name(value: String) {
+		this._name = value;
+	}
 }
