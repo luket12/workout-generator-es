@@ -1,11 +1,11 @@
 "use strict";
 
 export default class Exercise {
-	private _exerciseName: String;
+	private _name: String;
 	private _setNumber: Number;
 
-		constructor(exerciseName: String) {
-			this._exerciseName = exerciseName;
+		constructor(name: String) {
+			this._name = name;
 		}
 
 		get setNumber(): Number {
@@ -16,11 +16,11 @@ export default class Exercise {
 			this._setNumber = value;
 		}
 
-		get exerciseName(): String {
-			return this._exerciseName;
+		get name(): String {
+			return this._name;
 		}
 
-		set exerciseName(value: String) {
-			this._exerciseName = value;
+		set name(value: String) {
+			this._name = value;
 		}
 }

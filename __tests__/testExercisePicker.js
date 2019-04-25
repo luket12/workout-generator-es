@@ -19,6 +19,14 @@ describe('The exercise picker', () => {
       {
          "name": "Squats",
          "type": "Weight"
+      },
+      {
+         "name": "Bench",
+         "type": "Weight"
+      },
+      {
+         "name": "Dumbell",
+         "type": "Weight"
       }
    ];
    const exercisePicker = new ExercisePicker(exercises);
@@ -37,7 +45,7 @@ describe('The exercise picker', () => {
 
       // Verify they dont all match, must be randomising them
       let matches = workoutSetsA.filter((item, index) => {
-         return workoutSetsA[index].exerciseName === workoutSetsB[index].exerciseName;
+         return workoutSetsA[index].name === workoutSetsB[index].name;
       });
 
       expect(matches.length).toBeLessThan(workoutSetsA.length);
@@ -47,24 +55,11 @@ describe('The exercise picker', () => {
    test('does not allow handstands twice in a row', () => {
       // Create some workout sets
       let workoutSetsA = [
-        new WorkoutSet(1, new Exercise("Handstand")),
-        new WorkoutSet(2, new Exercise("Handstand")),
-        new WorkoutSet(3, new Exercise("Squats")),
-        new WorkoutSet(4, new Exercise("Deadlift"))
+         new WorkoutSet(1, new Exercise("Squats")),
+         new WorkoutSet(2, new Exercise("Deadlift")),
+         new WorkoutSet(3, new Exercise("Bench")),
+         new WorkoutSet(4, new Exercise("Handstand")),
       ];
-
-      // Find each workout set which has handstands
-      let handstandSetsA = workoutSetsA.filter((workoutSet) => {
-         return workoutSet.exercise.exerciseName === 'Handstand';
-      });
-
-      let duplicateSetsA = handstandSetsA.filter((currentSet, index) => {
-         let currentSetNumber = currentSet.setNumber;
-
-         if (typeof handstandSetsA[index+1] !== 'undefined') {
-            return (handstandSetsA[index+1].setNumber === currentSetNumber + 1) ? currentSet : '';
-         }
-      });
 
       let workoutSetsB = [
          new WorkoutSet(1, new Exercise("Handstand")),
