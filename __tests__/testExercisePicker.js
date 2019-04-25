@@ -76,7 +76,7 @@ describe('The exercise picker', () => {
       disallowedExercises.forEach((disallowedExercise) => {
          // Keep getting random exercises up to 100 times, find expected random results from both use cases
          for (let i = 0; i < 100; i++) {
-            let nextExerciseA = exercisePicker.pickExercise(workoutSetsA, 5, disallowedExercise);
+            let nextExerciseA = exercisePicker.pickExercise(workoutSetsA, 5, disallowedExercise, []);
 
             let previousExerciseA = workoutSetsA[workoutSetsA.length - 1].exercise;
             let previousExerciseB = workoutSetsB[workoutSetsA.length - 1].exercise;
@@ -98,14 +98,49 @@ describe('The exercise picker', () => {
       });
    });
 
-   test('does not allow cardio exercises twice in a row',() => {
-      // Create exercises
+   test('does not allow exercises of the same type twice in a row',() => {
+      let disallowedExerciseTypes = [['Cardio']];
 
       // Create some workout sets
+      let workoutSetsA = [
+         new WorkoutSet(1, new Exercise('Bench Press', 'Weight')),
+         new WorkoutSet(2, new Exercise('Squat', 'Weight')),
+         new WorkoutSet(3, new Exercise('Jogging', 'Cardio')),
+      ];
 
-      // Find each workout set which has handstands
+      let workoutSetsB = [
+         new WorkoutSet(1, new Exercise('Squat', 'Weight')),
+         new WorkoutSet(2, new Exercise('Bench Press', 'Weight')),
+         new WorkoutSet(3, new Exercise('Jogging', 'Cardio')),
+         new WorkoutSet(4, new Exercise('Jumping Jacks', 'Fitness'))
+      ];
 
-      // Check the next workout set is definitely not cardio also
+      disallowedExerciseTypes.forEach((exerciseType) => {
+         let duplicateExerciseTypeFoundDatasetA = false;
+         let duplicateExerciseTypeFoundDatasetB = false;
+
+         for (let i = 0; i < 100; i++) {
+            // Pick new exercise 100 times, none of those should be the same type if it's working correctly
+            let newExerciseDatasetA = exercisePicker.pickExercise(workoutSetsA, 5, [], exerciseType);
+
+            // Get the latest workout set type
+            let previousSetDatasetA = workoutSetsA[workoutSetsA.length - 1].exercise;
+            let previousSetDatasetB = workoutSetsB[workoutSetsB.length - 1].exercise;
+
+            if (newExerciseDatasetA.type === previousSetDatasetA.type) {
+               duplicateExerciseTypeFoundDatasetA = true;
+               break;
+            }
+
+            if (newExerciseDatasetA.type === previousSetDatasetB.type) {
+               duplicateExerciseTypeFoundDatasetB = true;
+               break;
+            }
+         }
+
+         expect(duplicateExerciseTypeFoundDatasetA).toEqual(false);
+         expect(duplicateExerciseTypeFoundDatasetB).toEqual(false);
+      });
    });
 
    test('beginner have 4 breaks, any other user have 2', () => {
