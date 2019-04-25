@@ -12,14 +12,40 @@ export default class ExercisePicker {
 		return this._exercises;
 	}
 
-	pickExercise(workoutSets: Array<WorkoutSet> = [], currentSet: Number = 0): Exercise {
+	pickExercise(workoutSets: Array<WorkoutSet> = [], currentSet: Number = 0, excludedExercises: []): Exercise {
 		let randomExercise = this.getRandom();
 
-		randomExercise = this.disallowDoubleHandstands(randomExercise, workoutSets, currentSet);
+		randomExercise = this.disallowDoubleExercises(excludedExercises, randomExercise, workoutSets, currentSet);
+
+		// randomExercise = this.disallowDoubleHandstands(randomExercise, workoutSets, currentSet);
 
 		return new Exercise(randomExercise.name);
 	}
-	
+
+	disallowDoubleExercises(excludedExercises: [], randomExercise: Exercise, workoutSets: Array<WorkoutSet>, currentSet: Number = 0) {
+		if (typeof excludedExercises === "undefined" || excludedExercises.length <= 0) {
+			return randomExercise;
+		}
+
+		excludedExercises.forEach((exercise) => {
+			// Check the excluded exercise matches the current random
+			if (randomExercise.name === exercise) {
+				// @ts-ignore
+				let previousSet = workoutSets[currentSet-2];
+
+				// Check the previous set was also the same as the random
+				if (previousSet.exercise.name === randomExercise.name) {
+
+					// Change the random exercise until it's not a handstand
+					while (randomExercise.name === exercise) {
+						randomExercise = this.pickExercise(workoutSets, currentSet, excludedExercises);
+					}
+				}
+			}
+		});
+		return randomExercise;
+	}
+
 	getRandom() {
 		let randomIndex = Math.floor(Math.random() * this.exercises.length);
 
