@@ -66,7 +66,7 @@ export default class WorkoutGenerator {
         let workoutSets: any[] | WorkoutSet[] = [];
 
         for (let setNumber = 0; setNumber < this.getWorkoutSets(); setNumber++) {
-          workoutSets.push(new WorkoutSet(setNumber+1, exercisePicker.getRandom(setNumber, workoutSets)));
+          workoutSets.push(new WorkoutSet(setNumber+1, exercisePicker.pickExercise(workoutSets, setNumber)));
         }
 
         let workout = this.workouts.push(new Workout(users[i].name, workoutSets));
