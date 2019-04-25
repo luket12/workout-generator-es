@@ -12,12 +12,18 @@ export default class ExercisePicker {
 		return this._exercises;
 	}
 
-	pickExercise(workoutSets: Array<WorkoutSet> = [], currentSet: Number = 0, excludedExercises: []): Exercise {
+	pickExercise(workoutSets: Array<WorkoutSet> = [], currentSet: Number = 0, excludedExercises: [], excludedTypes: []): Exercise {
 		let randomExercise = this.getRandom();
 
 		randomExercise = this.disallowDoubleExercises(excludedExercises, randomExercise, workoutSets, currentSet);
 
-		return new Exercise(randomExercise.name);
+		randomExercise = this.disallowDoubleTypes(excludedTypes, randomExercise, workoutSets, currentSet);
+
+		return new Exercise(randomExercise.name, randomExercise.type);
+	}
+
+	disallowDoubleTypes(excludedTypes: [], randomExercise: Exercise, workoutSets: Array<WorkoutSet>, currentSet: Number = 0) {
+		return randomExercise;
 	}
 
 	disallowDoubleExercises(excludedExercises: [], randomExercise: Exercise, workoutSets: Array<WorkoutSet>, currentSet: Number = 0) {
@@ -36,7 +42,7 @@ export default class ExercisePicker {
 
 					// Change the random exercise until it's not a handstand
 					while (randomExercise.name === exercise) {
-						randomExercise = this.pickExercise(workoutSets, currentSet, excludedExercises);
+						randomExercise = this.pickExercise(workoutSets, currentSet, excludedExercises, []);
 					}
 				}
 			}
