@@ -11,6 +11,15 @@ describe('The workout generator', () => {
   let setTime = 60;
   const workoutGenerator = new WorkoutGenerator(workoutSets, setTime);
 
+  let exercises = [
+    {
+      "name": "Handstands"
+    },
+    {
+      "name": "Bench Press"
+    }
+  ];
+
   test('can set the correct set total and set times', () => {
     expect(workoutGenerator.getWorkoutSetTime()).toEqual(60);
     expect(workoutGenerator.getWorkoutSets()).toEqual(30);
@@ -27,12 +36,6 @@ describe('The workout generator', () => {
       {
         'name': 'Jon',
         'type': 'beginner'
-      }
-    ];
-
-    let exercises = [
-      {
-        "name": "Handstands"
       }
     ];
 
