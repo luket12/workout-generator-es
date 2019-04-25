@@ -100,8 +100,8 @@ function getRandomArbitrary(min, max) {
 }
 
 function getWorkoutSetComparisonIndexes(workoutSets) {
-    return Array.apply(null, Array(getRandomArbitrary(3,6)))
-        .map(() => {
-            return getRandomArbitrary(1, workoutSets - 1);
-        });
+  return Array.apply(null, Array(getRandomArbitrary(3,6)))
+    .map(() => {
+        return getRandomArbitrary(1, workoutSets - 1);
+    });
 }
